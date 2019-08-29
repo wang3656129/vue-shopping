@@ -3,10 +3,10 @@
     <IndexNavbar />
     <loading :active.sync="isLoading"></loading>
     <div class="row mt-4">
-      <div class="col-3">
+      <div class="col-md-3 col-12">
         <div class="row">
           <div class="col-2"></div>
-          <div class="col-10 d-flex align-items-center flex-column">
+          <div class="col-md-10 col-12 d-flex align-items-center flex-column">
             <button
               type="button"
               class="btn btn-secondary mb-3 w-100"
@@ -27,10 +27,10 @@
 
       <div class="col-md-9">
         <div class="row">
-          <div class="col-md-4 mb-4" v-for="item in filterData[currentPage - 1]" :key="item.id">
+          <div class="col-lg-4 col-md-6 col-12 mb-4 card-shadow" v-for="item in filterData[currentPage - 1]" :key="item.id">
             <div class="card border-0 shadow-sm">
               <div
-                style="height: 150px; background-size: cover; background-position: center"
+                class="img-fluid img-width"
                 :style="{backgroundImage: `url(${item.imageUrl})`}"
               ></div>
               <div class="card-body">
@@ -95,7 +95,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <img :src="product.imageUrl" class="img-fluid" alt />
+            <img :src="product.imageUrl" class="img-position img-fluid" alt />
             <blockquote class="blockquote mt-3">
               <p class="mb-0">{{ product.content }}</p>
               <footer class="blockquote-footer text-right">{{ product.description }}</footer>
@@ -216,3 +216,24 @@ export default {
   }
 };
 </script>
+
+<style>
+.img-width{
+  height: 250px; 
+  background-size: cover; 
+  background-position: center;
+}
+.img-position{
+  margin-left: 55px;
+}
+.card-shadow{
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
+}
+  @media (max-width: 768px) {
+    .img-width{
+      height: 500px;
+      width: 500px;
+      background-position: center;
+    }
+  }
+</style>
