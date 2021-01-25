@@ -63,10 +63,16 @@ export default {
   methods: {
     signin() {
       const api = `${process.env.APIPATH}/admin/signin`;
-      this.$http.post(api, this.user).then(response => {
+      const vm = this;
+      this.$http.post(api, vm.user).then((response) => {
         console.log(response.data);
         if (response.data.success) {
-          this.$router.push("/admin/products");
+          const token = response.data.token;
+          const expired = response.data.expired;
+          document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
+          vm.$router.push("/admin/products");
+        } else {
+          console.log("登入失敗!");
         }
       });
     }
